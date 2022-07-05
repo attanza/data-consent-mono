@@ -33,7 +33,7 @@ async function bootstrap() {
     transport: Transport.KAFKA,
     options: {
       client: {
-        brokers: ['localhost:9092'],
+        brokers: [process.env.KAFKA_URL],
       },
       consumer: {
         groupId: 'audit-trail-consumer',

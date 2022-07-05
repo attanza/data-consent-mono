@@ -12,5 +12,6 @@ export const envalidate = () => {
     MINIO_SECRET_KEY: str(),
     MINIO_BUCKET_NAME: str(),
     FRONT_END_URL: str(),
+    KAFKA_URL: str(),
   });
 };

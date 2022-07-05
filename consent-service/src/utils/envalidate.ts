@@ -17,5 +17,6 @@ export const envalidate = () => {
     REDIS_PORT: port(),
     REDIS_PREFIX: str(),
     FRONT_END_URL: str(),
+    KAFKA_URL: str(),
   });
 };

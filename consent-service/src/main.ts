@@ -28,18 +28,18 @@ async function bootstrap() {
   app.use(morgan('combined'));
   app.useGlobalFilters(new AllExceptionsFilter());
   app.useGlobalPipes(new ValidationPipe());
-  // app.connectMicroservice({
-  //   transport: Transport.KAFKA,
-  //   options: {
-  //     client: {
-  //       brokers: ['localhost:9092'],
-  //     },
-  //     consumer: {
-  //       groupId: 'consent-consumer',
-  //     },
-  //   },
-  // });
-  // await app.startAllMicroservices();
+  app.connectMicroservice({
+    transport: Transport.KAFKA,
+    options: {
+      client: {
+        brokers: [process.env.KAFKA_URL],
+      },
+      consumer: {
+        groupId: 'consent-consumer',
+      },
+    },
+  });
+  await app.startAllMicroservices();
   await app.listen(PORT);
   Logger.log(`Consent Service running at http://localhost:${PORT}`, 'Bootstrap');
 }

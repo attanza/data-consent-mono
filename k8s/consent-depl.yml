@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consent-depl
+  labels:
+    name: consent-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: consent-depl
+  template:
+    metadata:
+      name: consent-depl
+      labels:
+        name: consent-depl
+    spec:
+      containers:
+        - name: consent-depl
+          image: attanza/consent-service
+          ports:
+            - containerPort: 10001
+          envFrom:
+            - configMapRef:
+                name: consent-config
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consent-service
+spec:
+  type: NodePort
+  selector:
+    name: consent-depl
+  ports:
+    - port: 10001
+      targetPort: 10001
+      nodePort: 30001
