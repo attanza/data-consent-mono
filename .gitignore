@@ -1,0 +1,11 @@
+# server
+*/dist
+*/node_modules
+*/.env
+
+# OS
+.DS_Store
+
+run.sh
+
+

@@ -1,0 +1,45 @@
+<v-toolbar light flat dense>
+      <v-spacer></v-spacer>
+      <v-toolbar-items>
+        <v-btn text @click="selectAll">Select All</v-btn>
+        <v-btn text @click="clearAll">Clear All</v-btn>
+        <v-combobox
+          v-model="source"
+          :items="sourceItems"
+          label="Source"
+          clearable
+          outlined
+          dense
+          class="mt-1"
+        />
+      </v-toolbar-items>
+    </v-toolbar>
+    <v-row class="my-4">
+      <v-col v-for="term in terms" cols="12" sm="4" md="4" :key="term._id">
+        <v-checkbox
+          v-model="selected"
+          :label="term.term"
+          :value="term._id"
+        ></v-checkbox>
+      </v-col>
+    </v-row>
+    <v-toolbar light flat dense>
+      <v-btn color="primary" @click="submit">Submit</v-btn>
+      <v-spacer></v-spacer>
+      <v-toolbar-items>
+        <v-combobox
+          v-model="perPage"
+          :items="perPages"
+          style="max-width: 70px"
+          class="mr-4"
+          outlined
+          dense
+        />
+        <v-pagination
+          v-model="page"
+          :length="paginationLength"
+          circle
+          :total-visible="5"
+        />
+      </v-toolbar-items>
+    </v-toolbar>

@@ -1,0 +1,4 @@
+@baseUrl = http://localhost:11000
+
+### audit trails
+GET {{baseUrl}}/audit-trails
