@@ -4,9 +4,10 @@ import { ITableHeader } from '~/interfaces/table-header.interface'
 import moment from '~/utils/moment'
 
 export const headers: ITableHeader[] = [
-  { text: 'NIK', value: 'nik' },
-  { text: 'Source', value: 'source' },
   { text: 'Name', value: 'name' },
+  { text: 'NIK', value: 'nik' },
+  { text: 'CIF', value: 'cif' },
+  { text: 'Source', value: 'source' },
   { text: 'Email', value: 'email' },
   { text: 'Phone', value: 'phone' },
   { text: 'Actions', value: 'actions', sortable: false },
@@ -17,7 +18,13 @@ export const formItems: IFormItem[] = [
     key: 'nik',
     caption: 'NIK',
     el: EFormItemElement.TEXT,
-    rules: 'required|max:250',
+    rules: 'max:250',
+  },
+  {
+    key: 'cif',
+    caption: 'CIF',
+    el: EFormItemElement.TEXT,
+    rules: 'max:250',
   },
   {
     key: 'name',

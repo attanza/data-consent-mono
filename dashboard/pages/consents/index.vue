@@ -32,8 +32,8 @@
         :footer-props="footerProps"
         :server-items-length="total"
       >
-        <template v-slot:item.nik="{ item }">
-          <NuxtLink :to="`${link}/${item._id}`">{{ item.nik }}</NuxtLink>
+        <template v-slot:item.name="{ item }">
+          <NuxtLink :to="`${link}/${item._id}`">{{ item.name }}</NuxtLink>
         </template>
         <template v-slot:item.source="{ item }">
           {{ item.source ? item.source.name : '' }}
