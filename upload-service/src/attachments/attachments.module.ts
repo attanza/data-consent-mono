@@ -14,7 +14,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         options: {
           client: {
             clientId: 'attachment',
-            brokers: ['localhost:9092'],
+            brokers: [process.env.KAFKA_URL],
           },
           consumer: {
             groupId: 'attachment-consumer',
