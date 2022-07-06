@@ -27,8 +27,17 @@ export default {
         href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons|Material+Icons+Outlined',
       },
       {
+        rel: 'preconnect',
+        href: 'https://fonts.googleapis.com',
+      },
+      {
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com',
+        crossorigin: true,
+      },
+      {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons|Material+Icons+Outlined',
+        href: 'https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,400&display=swap',
       },
     ],
   },
@@ -87,8 +96,12 @@ export default {
     middleware: ['auth'],
   },
 
+  build: {},
+
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
+    treeShake: true,
+    defaultAssets: false,
     theme: {
       disable: false,
       light: true,
@@ -103,6 +116,4 @@ export default {
       },
     },
   },
-
-  build: {},
 }

@@ -13,8 +13,13 @@ const menus: IMenu[] = [
   { title: 'Sources', icon: 'source', to: '/sources' },
   { title: 'Check Lists', icon: 'rule', to: '/check-lists' },
   { title: 'Terms', icon: 'gavel', to: '/terms' },
-  { title: 'Consents', icon: 'stars', to: '/consents' },
-  { title: 'Audit Trails', icon: 'stars', to: '/audit-trails' },
+  { title: 'Consents', icon: 'verified', to: '/consents' },
+  {
+    title: 'Audit Trails',
+    icon: 'subject',
+    to: '/audit-trails',
+    role: [EUserRole.ADMIN],
+  },
 ]
 
 export default menus
