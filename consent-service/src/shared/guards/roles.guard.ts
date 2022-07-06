@@ -16,12 +16,14 @@ export class RolesGuard implements CanActivate {
     const _id = request.headers['x-auth-id'];
     const email = request.headers['x-auth-email'];
     const role = request.headers['x-auth-role'];
+    if (request.headers['x-source-id'] && request.url.match(/consents/)) {
+      request.body.source = request.headers['x-source-id'];
+    }
     if (!_id && !email && !role) {
       return false;
     }
     const user = { _id, email, role };
     request.user = user;
-    console.log('user', user);
 
     if (roles.includes(EUserRole.ALL)) {
       return true;

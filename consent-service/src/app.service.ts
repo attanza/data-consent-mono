@@ -6,6 +6,7 @@ import { capitalCase, snakeCase } from 'change-case';
 import { hash } from 'argon2';
 import { SourcesService } from './sources/sources.service';
 import { CreateSourceDto } from './sources/source.dto';
+import { Redis } from './utils/redis';
 @Injectable()
 export class AppService {
   constructor(
@@ -42,6 +43,7 @@ export class AppService {
     await Promise.all([
       this.userService.insertMany(userData),
       this.sourceService.insertMany(sourceData),
+      Redis.flushall(),
     ]);
   }
 }

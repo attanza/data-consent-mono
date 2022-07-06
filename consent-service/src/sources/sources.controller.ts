@@ -56,8 +56,8 @@ export class SourcesController {
   }
 
   @Get(':id')
-  async get(@Param() { id }: MongoIdPipe) {
-    const result = await this.service.findOrFail({ _id: id });
+  async get(@Param('id') id: string) {
+    const result = await this.service.getSource(id);
     return responseDetail(this.resource, result);
   }
 

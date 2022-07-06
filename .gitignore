@@ -4,6 +4,7 @@
 */.env
 */build.sh
 */TODO.md
+*/req.http
 
 # OS
 .DS_Store

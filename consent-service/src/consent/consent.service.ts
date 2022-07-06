@@ -1,4 +1,9 @@
-import { BadRequestException, Injectable, UnprocessableEntityException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  Logger,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { isMongoId } from 'class-validator';
 import { Pagination } from 'mongoose-paginate-ts';
@@ -17,7 +22,7 @@ import { EResourceAction } from 'src/shared/interfaces/resource-action';
 @Injectable()
 export class ConsentService extends BaseService<ConsentDocument> {
   private resource = 'Consent';
-
+  private logger = new Logger(ConsentService.name);
   constructor(
     @InjectModel(Consent.name) private model: Pagination<ConsentDocument>,
     private readonly termService: TermService,
@@ -52,10 +57,12 @@ export class ConsentService extends BaseService<ConsentDocument> {
     });
     found = await this.findOne({ $or: or });
     if (!found) {
+      this.logger.log('Create new Consent');
       found = await this.create(dto, keys);
       const auditData = generateAuditData(req, EResourceAction.CREATE, this.resource, found);
       this.auditService.auditTrail(auditData);
     } else {
+      this.logger.log('Update Consent');
       oldData = Object.assign({}, found);
       if (dto.term) {
         const term = await this.checkTerm(dto.term);
@@ -81,6 +88,7 @@ export class ConsentService extends BaseService<ConsentDocument> {
           found[d] = dto[d];
         }
       });
+
       await found.save();
       const auditData = generateAuditData(
         req,
@@ -113,7 +121,7 @@ export class ConsentService extends BaseService<ConsentDocument> {
         ])
         .exec();
     } else {
-      const searchable = ['nik', 'phone', 'email'];
+      const searchable = ['nik', 'phone', 'email', 'cif'];
       const or: any = [];
       searchable.map((s) => {
         or.push({ [s]: id });

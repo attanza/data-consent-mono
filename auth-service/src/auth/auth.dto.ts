@@ -13,3 +13,11 @@ export class RegisterDto {
   @MinLength(8)
   password: string;
 }
+
+export class GenerateSourceTokenDto {
+  @IsNotEmpty()
+  clientId: string;
+
+  @IsNotEmpty()
+  clientSecret: string;
+}

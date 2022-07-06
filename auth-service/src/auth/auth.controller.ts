@@ -1,6 +1,6 @@
 import { Body, Controller, Get, HttpCode, Post, Req, UseGuards } from '@nestjs/common';
 import { responseDetail, responseSuccess } from 'src/utils/response-parser';
-import { RegisterDto } from './auth.dto';
+import { GenerateSourceTokenDto, RegisterDto } from './auth.dto';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { LocalAuthGuard } from './local-auth.guard';
@@ -27,5 +27,11 @@ export class AuthController {
   async register(@Body() data: RegisterDto) {
     await this.authService.register(data);
     return responseSuccess('Register Suceed', undefined);
+  }
+
+  @Post('generate-source-token')
+  async generateSourceToken(@Body() dto: GenerateSourceTokenDto) {
+    const token = await this.authService.generateSourceToken(dto);
+    return responseSuccess('Source token generated', { token });
   }
 }

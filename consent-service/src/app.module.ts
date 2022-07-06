@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { CacheInterceptor, CacheModule, Module } from '@nestjs/common';
 
 import { APP_INTERCEPTOR } from '@nestjs/core';
@@ -25,7 +26,6 @@ import { StatisticsModule } from './statistics/statistics.module';
     CacheModule.register<ClientOpts>({
       isGlobal: true,
       store: redisStore,
-
       host: process.env.REDIS_URL,
       port: 6379,
     }),

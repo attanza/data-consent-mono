@@ -6,9 +6,17 @@ const baseRateLimit = {
 const baseProxy = {
   changeOrigin: true,
   onProxyReq: function onProxyReq(proxyReq, req, res) {
-    proxyReq.setHeader("x-auth-id", req.user._id);
-    proxyReq.setHeader("x-auth-role", req.user.role);
-    proxyReq.setHeader("x-auth-email", req.user.email);
+    if (req.user) {
+      proxyReq.setHeader("x-auth-id", req.user._id);
+      proxyReq.setHeader("x-auth-role", req.user.role);
+      proxyReq.setHeader("x-auth-email", req.user.email);
+    }
+    if (req.source) {
+      proxyReq.setHeader("x-auth-id", req.source._id);
+      proxyReq.setHeader("x-auth-role", "ALL");
+      proxyReq.setHeader("x-auth-email", req.source.name);
+      proxyReq.setHeader("x-source-id", req.source._id);
+    }
   },
 };
 
