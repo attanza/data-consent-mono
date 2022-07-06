@@ -36,7 +36,6 @@ const getUser = async (id) => {
     await Redis.set(redisKey, resp.data);
     return resp.data;
   } catch (error) {
-    console.log(error);
     return null;
   }
 };
@@ -78,7 +77,6 @@ const getSource = async (id) => {
     await Redis.set(redisKey, resp.data);
     return resp.data;
   } catch (error) {
-    console.log(error);
     return null;
   }
 };
